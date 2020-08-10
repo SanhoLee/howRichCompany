@@ -3,9 +3,17 @@
   "version": "1.0.0",
   "description": "Let's Compare Capital and Debt for Companies.",
   "main": "init.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "SanhoLEE",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.11.1",
+    "@babel/node": "^7.10.5",
+    "express": "^4.17.1"
+  },
+  "scripts": {
+    "start": "nodemon --exec babel-node init.js"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
 }
