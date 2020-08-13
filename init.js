@@ -1,12 +1,13 @@
 // 단일 파일을 실행시키기 위한 방법
 // node {filename}
-const express = require("express");
+import app from "./app";
+import dotenv from "dotenv";
 
-const app = express();
-app.listen(4000, () => {
-  console.log("Is that working???");
-});
+dotenv.config();
 
-app.get("/", () => {
-  console.log("lalalal");
-});
+const PORT = process.env.PORT || 4000;
+
+const handleListening = () =>
+  console.log(`We are Listening : http://localhost:${PORT}`);
+
+app.listen(PORT, handleListening);
