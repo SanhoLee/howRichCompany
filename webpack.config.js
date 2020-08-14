@@ -16,12 +16,32 @@ const config = {
       {
         // rule for js file
         test: /\.(js)$/,
-        loader: "babel-loader",
+        use: [
+          {
+            loader: "babel-loader",
+          },
+        ],
       },
       {
         // rule for scss file
         test: /\.(scss)$/,
-        loaders: ["style-loader", "css-loader", "sass-loader"],
+        use: [
+          // miniCssExtract.loader is needed just right here!!
+          // It Extract Css code from bundled main.js file.
+          miniCssExtract.loader,
+          {
+            loader: "css-loader",
+          },
+          {
+            loader: "postcss-loader",
+            options: {
+              plugins: [autoprefixer({ overrideBrowserslist: "cover 99.5%" })],
+            },
+          },
+          {
+            loader: "sass-loader",
+          },
+        ],
       },
     ],
   },
@@ -29,47 +49,12 @@ const config = {
     path: OUTPUT_FILE,
     filename: "[name].js",
   },
+  plugins: [
+    new miniCssExtract({
+      path: OUTPUT_FILE,
+      filename: "styles.css",
+    }),
+  ],
 };
 
 module.exports = config;
-
-// 옛날 썻던것!
-// const config = {
-//   entry: ["@babel/polyfill", ENTRY_FILE],
-//   mode: MODE,
-//   module: {
-//     rules: [
-//       {
-//         // rule for js to conventional js format
-//         test: /\.(js)$/,
-//         use: [
-//           {
-//             loader: "babel-loader",
-//           },
-//         ],
-//       },
-//       {
-//         //   rule for scss to css format
-//         test: /\.(scss)$/,
-//         use: [
-//           {
-//             loader: miniCssExtract.loader,
-//             options: {
-//               plugins() {
-//                 return [autoprefixer({ browserslist: "cover 99.5%" })];
-//               },
-//             },
-//           },
-//           "css-loader",
-//           "postcss-loader",
-//           "sass-loader",
-//         ],
-//       },
-//     ],
-//   },
-//   output: {
-//     path: OUTPUT_FILE,
-//     filename: "[name].js",
-//   },
-//   plugins: [new miniCssExtract("styles.css")],
-// };
