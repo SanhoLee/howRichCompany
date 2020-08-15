@@ -6,3 +6,7 @@ export const handleHome = async (req, res) => {
     console.log(error);
   }
 };
+
+export const search = (req, res) => {
+  res.render("search", { pagetitle: "Search" });
+};

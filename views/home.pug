@@ -1,8 +1,6 @@
-doctype html
-html
-    head
-        script(src="https://kit.fontawesome.com/f51b0698b7.js" crossorigin="anonymous")
-        title #{pagetitle}
-        link(rel="stylesheet", href="/static/styles.css")
-    body
-        h1 Hello World!
+extends layout/main.pug
+
+block fwanggu
+    .searchBox
+        form(action=routes.search, method="get")#jsSearch
+            input(type="text" placeholder="  Which Company ? ", name="company-name")

@@ -3,7 +3,6 @@ const miniCssExtract = require("mini-css-extract-plugin");
 const autoprefixer = require("autoprefixer");
 
 // WEBPACK_ENV = development --> define on script line in package.json file.
-const MODE = process.env.WEBPACK_ENV;
 const ENTRY_FILE = path.resolve(__dirname, "assets", "js", "main.js");
 const OUTPUT_FILE = path.resolve(__dirname, "static");
 
