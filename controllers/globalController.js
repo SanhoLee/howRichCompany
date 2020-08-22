@@ -1,11 +1,14 @@
 import dotenv from "dotenv";
-import fetch from "node-fetch";
+import fs from "fs";
+import { text } from "body-parser";
+import xml2Json from "xml-js";
 
 dotenv.config();
 
 const DART_BASE_URL = "https://opendart.fss.or.kr/api/list.json";
 const PAGE_POS = "&page_no=";
-const SHOW_CORPS = "&page_count=";
+const SHOW_CORPS = "&page_count=100";
+let FETCH_COUNT = 0;
 
 // method = get 지원하면 xml포맷도 가능함.
 // fetch기능으로 api 접근해야 하는 듯???
@@ -19,26 +22,31 @@ export const handleHome = async (req, res) => {
   }
 };
 
-const getCorpList = (url_element, page_number) => {
-  url_element = url_element + PAGE_POS + `${page_number}` + SHOW_CORPS + `100`;
-  fetch(url_element)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-    });
+const getCorpList = () => {
+  const xml = fs.readFile("../CORPCODE.xml", "utf8", (err, data) => {
+    if (err) throw err;
+    const parsingOption = {
+      compact: true,
+      spaces: 4,
+      ignoreAttributes: true,
+      ignoreDeclaration: true,
+    };
+
+    const jsonObj = xml2Json.xml2js(data, parsingOption);
+    console.log(`Total Company Count is ... :${jsonObj.result.list.length}`);
+  });
 };
 
-const findCorp = (searchingTerm) => {
-  const url_string = DART_BASE_URL + `?crtfc_key=${process.env.DART_KEY}`;
-  const temp = getCorpList(url_string, 1);
-  console.log("temp", temp);
-};
-
-export const getSearch = (req, res) => {
+export const getSearch = async (req, res) => {
   const {
     query: { term: searchingBy },
   } = req;
-  findCorp(searchingBy);
+  try {
+    await getCorpList();
+  } catch (error) {
+    console.log(`getCorpList has some ERROR : ${error}`);
+  }
+
   res.render("search", { pagetitle: "Search", searchingBy });
 };
 
