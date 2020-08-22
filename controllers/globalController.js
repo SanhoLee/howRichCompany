@@ -1,15 +1,17 @@
 import dotenv from "dotenv";
 import fs from "fs";
-import { text } from "body-parser";
 import converter from "xml-js";
-import { data } from "autoprefixer";
 
 dotenv.config();
 
 const DART_BASE_URL = "https://opendart.fss.or.kr/api/list.json";
 const PAGE_POS = "&page_no=";
 const SHOW_CORPS = "&page_count=100";
-let FETCH_COUNT = 0;
+
+const CORP_CODE = "corp_code";
+const CORP_NAME = "corp_name";
+const STOCK_CODE = "stock_code";
+const MODIFY_DATE = "modify_date";
 
 // method = get 지원하면 xml포맷도 가능함.
 // fetch기능으로 api 접근해야 하는 듯???
@@ -22,22 +24,6 @@ export const handleHome = async (req, res) => {
     console.log(error);
   }
 };
-
-// const getCorpList = () => {
-//   const xml = fs.readFile("../CORPCODE.xml", "utf8", (err, data) => {
-//     if (err) throw err;
-//     const option = {
-//       compact: true,
-//       spaces: 4,
-//       ignoreAttributes: true,
-//       ignoreDeclaration: true,
-//     };
-
-//     const jsonObj = converter.xml2js(data, option);
-//     const corpList = jsonObj.result.list;
-//     console.log(`Total Company Count is ... :${jsonObj.result.list.length}`);
-//   });
-// };
 
 // refereced by https://github.com/nashwaan/xml-js/issues/53
 const nativeType = (value) => {
@@ -81,9 +67,12 @@ const getCorpList = () => {
 
   const jsonObj = converter.xml2js(xml, option);
   const totalCorps = jsonObj.result.list;
-  console.log(totalCorps);
-  // const corpList = jsonObj.result.list;
-  // console.log(`Total Company Count is ... :${jsonObj.result.list.length}`);
+  return totalCorps;
+};
+const foundCorpList = ({ list, term }) => {
+  console.log(list[0][CORP_NAME]);
+  const foundList = list.filter((potato) => potato[CORP_NAME].includes(term));
+  return foundList;
 };
 
 export const getSearch = async (req, res) => {
@@ -92,9 +81,11 @@ export const getSearch = async (req, res) => {
   } = req;
   try {
     const totalCorps = await getCorpList();
-    res.render("search", { pagetitle: "Search", searchingBy, totalCorps });
+    const foundCorps = foundCorpList({ list: totalCorps, term: searchingBy });
+    res.render("search", { pagetitle: "Search", searchingBy, foundCorps });
   } catch (error) {
     console.log(`getCorpList has some ERROR : ${error}`);
+    res.render("search", { pagetitle: "Search", searchingBy, totalCorps: [] });
   }
 };
 
