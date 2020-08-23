@@ -1,0 +1,16 @@
+.header {
+  font-size: 20px;
+  background-color: white;
+  padding: 20px 0;
+  margin-bottom: 10px;
+}
+
+.header_wrapper {
+  display: grid;
+  grid-template-columns: 1fr 500px 1fr;
+  align-items: center;
+  justify-self: center;
+  .header_column {
+    justify-self: center;
+  }
+}

@@ -13,3 +13,4 @@
 - [x] XML Filt to JSON (PARSING)
 - [x] SEARCH COMPANY INFO.
 - [ ] PAGE LAYOUT
+- [ ] Changing Bundler : webpack -> gulp

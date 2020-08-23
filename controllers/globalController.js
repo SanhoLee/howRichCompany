@@ -1,6 +1,7 @@
 import dotenv from "dotenv";
 import fs from "fs";
 import converter from "xml-js";
+import routes from "../routes";
 
 dotenv.config();
 
@@ -70,7 +71,6 @@ const getCorpList = () => {
   return totalCorps;
 };
 const foundCorpList = ({ list, term }) => {
-  console.log(list[0][CORP_NAME]);
   const foundList = list.filter((potato) => potato[CORP_NAME].includes(term));
   return foundList;
 };
@@ -85,7 +85,7 @@ export const getSearch = async (req, res) => {
     res.render("search", { pagetitle: "Search", searchingBy, foundCorps });
   } catch (error) {
     console.log(`getCorpList has some ERROR : ${error}`);
-    res.render("search", { pagetitle: "Search", searchingBy, totalCorps: [] });
+    res.render("search", { pagetitle: "Search", searchingBy, foundCorps: [] });
   }
 };
 
