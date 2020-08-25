@@ -1,14 +1,13 @@
 extends layout/main.pug
 
 block fwanggu
-    .getNickname#jsNickname
+    .getNickname
         .nickname_column
             h1 Let me know your Nickname ! 
         .nickname_column
-            form
+            form#jsNickname
                 input(type="text" placeholder=" Nickname 😎 ", name="nickname")
-    .showNickname
-        h1 Hello Nickname.
-    .searchBox
+    .showGreeting#jsGreeting
+    .searchBox#jsSearchBox
         form(action=routes.search, method="get")#jsSearch
             input(type="text" placeholder="  Which Company ? ", name="term")
