@@ -1,6 +1,5 @@
 .header {
   font-size: 20px;
-  background-color: white;
   padding: 20px 0;
   margin-bottom: 10px;
 }
@@ -12,5 +11,13 @@
   justify-self: center;
   .header_column {
     justify-self: center;
+    a {
+      text-decoration: none;
+      color: rgba(0, 0, 0, 0.8);
+      font-weight: 800;
+      i {
+        margin-left: 10px;
+      }
+    }
   }
 }
