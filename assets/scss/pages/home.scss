@@ -4,8 +4,12 @@
 }
 
 .nickname_column {
-  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
   align-items: center;
+}
+
+.nickname_column,
+.showGreeting {
+  margin-bottom: 10px;
 }

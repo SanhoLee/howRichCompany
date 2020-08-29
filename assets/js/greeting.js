@@ -1,19 +1,36 @@
+const { handleResetBtn } = require("./reset");
+
 const loginForm = document.getElementById("jsNickname");
 const body = document.querySelector("body");
 const greeting = document.getElementById("jsGreeting");
 const searchBox = document.getElementById("jsSearchBox");
 
 const NICKNAME = "nickname";
-
 const LOGGED_IN = "loggedIn";
 const LOGGED_OUT = "loggedOut";
+const SEARCHING = "searching";
+const RESET_BTN = "jsResetBtn";
 
 const nickname = localStorage.getItem(NICKNAME);
 
 const paintGreeting = (text) => {
-  const greetingMsg = `Hello ${text} !!!`;
-  greeting.innerText = greetingMsg;
-  body.className = LOGGED_IN;
+  if (greeting !== null) {
+    const msgBox = document.createElement("span");
+    const resetBtn = document.createElement("button");
+
+    resetBtn.id = RESET_BTN;
+    resetBtn.className = "resetBtn";
+    msgBox.innerText = `Hello ${text} !!!`;
+    resetBtn.innerText = "RESET 🗑";
+
+    greeting.appendChild(msgBox);
+    greeting.appendChild(resetBtn);
+
+    body.className = LOGGED_IN;
+
+    // reset nickname...
+    resetBtn.addEventListener("click", handleResetBtn);
+  }
 };
 
 const setName = (text) => {

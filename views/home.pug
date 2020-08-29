@@ -1,4 +1,6 @@
 extends layout/main.pug
+include mixins/searchBox
+
 
 block fwanggu
     h1.home howRich
@@ -9,6 +11,4 @@ block fwanggu
             form#jsNickname
                 input(type="text" placeholder=" Nickname 😎 ", name="nickname")
     .showGreeting#jsGreeting
-    .searchBox#jsSearchBox
-        form(action=routes.search, method="get")#jsSearch
-            input(type="text" placeholder="  Which Company ? ", name="term")
+    +searchBox({})

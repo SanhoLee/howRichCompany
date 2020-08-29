@@ -1,3 +1,5 @@
+include ../mixins/searchBox
+
 header.header
     .header_wrapper
         .header_column
@@ -5,4 +7,6 @@ header.header
                 span howRich
                 i.fas.fa-city
         .header_column
+            +searchBox({})
         .header_column
+            span.cart_text CART

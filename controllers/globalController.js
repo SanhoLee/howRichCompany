@@ -82,7 +82,11 @@ export const getSearch = async (req, res) => {
   try {
     const totalCorps = await getCorpList();
     const foundCorps = foundCorpList({ list: totalCorps, term: searchingBy });
-    res.render("search", { pagetitle: "Search", searchingBy, foundCorps });
+    res.render("search", {
+      pagetitle: "Search",
+      searchingBy,
+      foundCorps,
+    });
   } catch (error) {
     console.log(`getCorpList has some ERROR : ${error}`);
     res.render("search", { pagetitle: "Search", searchingBy, foundCorps: [] });

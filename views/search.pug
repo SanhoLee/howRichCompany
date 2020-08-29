@@ -2,17 +2,18 @@ extends layout/main.pug
 include mixins/companyBlock
 
 block fwanggu
-    .search__header
-        h3 Seaching by ... #{searchingBy}
-        if foundCorps.length === 0
-            h5 No Corps found.
-        h5 #{foundCorps.length} Companies Found.
-    .search__corps
-            ul.company_elements#jsSearchCompanies
-                each item in foundCorps
-                    +companyBlock({
-                        corp_name:item.corp_name,
-                        corp_code:item.corp_code
-                    })
+    .contents_wrap
+        .search__header
+            h3 Seaching by ... #{searchingBy}
+            if foundCorps.length === 0
+                h5 No Corps found.
+            h5 #{foundCorps.length} Companies Found.
+        .search__corps
+                ul.company_elements#jsSearchCompanies
+                    each item in foundCorps
+                        +companyBlock({
+                            corp_name:item.corp_name,
+                            corp_code:item.corp_code
+                        })
 
                 

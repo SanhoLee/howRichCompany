@@ -8,27 +8,6 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
   background-color: whitesmoke;
   position: relative;
-  .getNickname,
-  .searchBox,
-  .showgreeting,
-  .header {
-    display: none;
-  }
-
-  &.loggedOut {
-    .getNickname {
-      display: block;
-    }
-  }
-  &.loggedIn {
-    .getNickname {
-      display: none;
-    }
-    .showgreeting,
-    .searchBox {
-      display: block;
-    }
-  }
 }
 
 main {
