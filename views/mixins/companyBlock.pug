@@ -2,6 +2,9 @@ mixin companyBlock(corp={})
 
     .companyBlock
         h5.company_name
-            span=corp.corp_name
-            span="  |  "
-            span=corp.corp_code
+            .checkBox#jsCheckBox
+                input(type="checkbox", name="checked", value="false")
+                .corp_info
+                    span=corp.corp_name
+                    span="  |  "
+                    span=corp.corp_code
