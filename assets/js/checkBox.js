@@ -6,6 +6,19 @@ const TRUE = "true";
 const FALSE = "false";
 let companyCart = [];
 
+const checkGoCart = () => {
+  Array.from(companies).forEach((company) => {
+    const booleanValue = company.querySelector("input").value;
+    if (booleanValue === TRUE) {
+      const corp_info = company.querySelector(".corp_info");
+      const corp_code = corp_info.lastChild.innerText;
+
+      console.log(corp_code);
+    } else {
+    }
+  });
+};
+
 const handleChk = (event) => {
   //   on event.path list, third element is for h5.company_name
   const { path, target: input } = event;
@@ -13,9 +26,9 @@ const handleChk = (event) => {
   corp_info = corp_info.split(" | ");
 
   if (input.value !== FALSE) {
-    // already check status....
     input.value = FALSE;
     // pop selected element
+    checkGoCart();
   } else {
     input.value = TRUE;
 
@@ -24,7 +37,6 @@ const handleChk = (event) => {
     corp_obj.CORP_CODE = corp_info[1];
     companyCart.push(corp_obj);
   }
-  console.log(companyCart);
 };
 
 const init = () => {
