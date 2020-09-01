@@ -9,11 +9,13 @@ block fwanggu
                 h5 No Corps found.
             h5 #{foundCorps.length} Companies Found.
         .search__corps
+            form(action=routes.cart, method="post")
                 ul.company_elements#jsSearchCompanies
                     each item in foundCorps
                         +companyBlock({
                             corp_name:item.corp_name,
                             corp_code:item.corp_code
                         })
+                input(type="submit", name="btn_submit",value="Submit")
 
                 
