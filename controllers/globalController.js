@@ -72,6 +72,15 @@ const getCorpList = () => {
 };
 const foundCorpList = ({ list, term }) => {
   const foundList = list.filter((potato) => potato[CORP_NAME].includes(term));
+  const corp_length = String(foundList[0].corp_code).length;
+  if (8 - corp_length !== 0) {
+    const diff = 8 - corp_length;
+    console.log(diff);
+    const newCode = "0".repeat(2) + String(foundList[0].corp_code);
+    console.log(`newCode : ${newCode}`);
+  } else {
+    console.log("no need to change code format !");
+  }
   return foundList;
 };
 

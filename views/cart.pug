@@ -1,3 +1,10 @@
 extends layout/main.pug
+include mixins/cartBlock
 
 block fwanggu
+        ul.cart__wrapper
+            each corp_code in checkedCorps
+                +cartBlock({
+                    corp_number:corp_code,
+                    corp_name:"lalala"
+                })
