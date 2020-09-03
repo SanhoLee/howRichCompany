@@ -9,10 +9,13 @@ const DART_BASE_URL = "https://opendart.fss.or.kr/api/list.json";
 const PAGE_POS = "&page_no=";
 const SHOW_CORPS = "&page_count=100";
 
+// corp obj keys..
 const CORP_CODE = "corp_code";
 const CORP_NAME = "corp_name";
 const STOCK_CODE = "stock_code";
 const MODIFY_DATE = "modify_date";
+
+const NUMBER_OF_CODE = 8;
 
 // method = get 지원하면 xml포맷도 가능함.
 // fetch기능으로 api 접근해야 하는 듯???
@@ -70,18 +73,27 @@ const getCorpList = () => {
   const totalCorps = jsonObj.result.list;
   return totalCorps;
 };
+
+const make8DigitCode = (corp_element) => {
+  const code = String(corp_element[CORP_CODE]);
+  const diff = NUMBER_OF_CODE - code.length;
+  if (diff !== 0) {
+    const newCode = "0".repeat(diff) + code;
+    corp_element[CORP_CODE] = newCode;
+    return corp_element;
+  } else {
+    return corp_element;
+  }
+};
+
+const updateToApiFormat = (list_of_object) =>
+  list_of_object.map((potato) => make8DigitCode(potato));
+
 const foundCorpList = ({ list, term }) => {
   const foundList = list.filter((potato) => potato[CORP_NAME].includes(term));
-  const corp_length = String(foundList[0].corp_code).length;
-  if (8 - corp_length !== 0) {
-    const diff = 8 - corp_length;
-    console.log(diff);
-    const newCode = "0".repeat(2) + String(foundList[0].corp_code);
-    console.log(`newCode : ${newCode}`);
-  } else {
-    console.log("no need to change code format !");
-  }
-  return foundList;
+  const updatedCorpList = updateToApiFormat(foundList);
+
+  return updatedCorpList;
 };
 
 export const getSearch = async (req, res) => {
