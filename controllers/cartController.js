@@ -1,4 +1,5 @@
 import { NULL } from "node-sass";
+import { test } from "./apiController";
 
 // if method for get,, req.query has info.
 export const getCart = (req, res) => {
@@ -39,7 +40,7 @@ const makeCartData = (targetList) => {
 };
 
 // if method for post,, req.body has info.
-export const postCart = (req, res) => {
+export const postCart = async (req, res) => {
   const {
     body: { corp_data: checkedBlocks },
   } = req;
@@ -47,7 +48,9 @@ export const postCart = (req, res) => {
   let checkedCorps = NULL;
   checkedCorps = makeArrayFormat(checkedBlocks);
   const cartCorps = makeCartData(checkedCorps);
-  console.log(cartCorps);
+
+  const temp = await test();
+  console.log(temp[0]);
 
   res.render("cart", { pagetitle: "Cart", cartCorps });
 };
