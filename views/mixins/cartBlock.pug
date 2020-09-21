@@ -5,7 +5,5 @@ mixin cartBlock(cart={})
             span=cart.corp_name
             span   | 
             span=cart.corp_number
-        .cart_corp_value
-            span 영업이익
-            span 순이익
-            span 부채
+            button.button.delete_button#jsDelBtn(name="delBtn") ❌
+            

@@ -3,7 +3,7 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
-const YEAR = 2016;
+const YEAR = 2019;
 const KIND_OF_REPORT = 11011;
 
 // corp obj keys..
@@ -20,10 +20,7 @@ const dartUrl_base =
   CORP_CODE +
   "00126380";
 
-let temp_list = [];
-
 export const test = async () => {
-  console.log(dartUrl_base);
   const rsp = await fetch(dartUrl_base)
     .then((data) => {
       return data.json();
@@ -33,7 +30,5 @@ export const test = async () => {
       return res.list;
     })
     .catch((error) => console.log(error));
-  temp_list.push(rsp[0]);
-  // console.log(rsp);
   return rsp;
 };

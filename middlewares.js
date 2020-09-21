@@ -4,6 +4,7 @@ import routes from "./routes";
 export const localsMiddleware = (req, res, next) => {
   res.locals.siteName = "howRichCompany";
   res.locals.routes = routes;
+
   console.log("middleware is working....");
   next();
 };

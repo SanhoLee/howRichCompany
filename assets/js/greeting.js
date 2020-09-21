@@ -3,8 +3,7 @@ const { handleResetBtn } = require("./reset");
 const loginForm = document.getElementById("jsNickname");
 const body = document.querySelector("body");
 const greeting = document.getElementById("jsGreeting");
-const searchBox = document.getElementById("jsSearchBox");
-
+const searchForm = document.querySelectorAll("#jsSearch")[1];
 const NICKNAME = "nickname";
 const LOGGED_IN = "loggedIn";
 const LOGGED_OUT = "loggedOut";
@@ -33,8 +32,17 @@ const paintGreeting = (text) => {
   }
 };
 
+const sendingNicknameForServer = (text) => {
+  const inputElement = document.createElement("input");
+  inputElement.type = "hidden";
+  inputElement.name = "nickname";
+  inputElement.value = text;
+  searchForm.appendChild(inputElement);
+};
+
 const setName = (text) => {
   localStorage.setItem(NICKNAME, text);
+  sendingNicknameForServer(text);
 };
 
 const handleSubmit = (event) => {

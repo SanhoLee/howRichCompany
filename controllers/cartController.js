@@ -1,11 +1,6 @@
 import { NULL } from "node-sass";
 import { test } from "./apiController";
 
-// if method for get,, req.query has info.
-export const getCart = (req, res) => {
-  res.render("cart", { pagetitle: "Cart" });
-};
-
 const makeArrayFormat = (_element) => {
   if (typeof _element !== "object") {
     // in case of having one element just like this,,,,  _element = "something"
@@ -39,18 +34,26 @@ const makeCartData = (targetList) => {
   return list_basket;
 };
 
+// if method for get,, req.query has info.
+export const getCart = (req, res) => {
+  res.render("cart", { pagetitle: "Cart" });
+};
+
 // if method for post,, req.body has info.
 export const postCart = async (req, res) => {
   const {
     body: { corp_data: checkedBlocks },
   } = req;
 
-  let checkedCorps = NULL;
-  checkedCorps = makeArrayFormat(checkedBlocks);
-  const cartCorps = makeCartData(checkedCorps);
-
-  const temp = await test();
-  console.log(temp[0]);
-
-  res.render("cart", { pagetitle: "Cart", cartCorps });
+  try {
+    let checkedCorps = NULL;
+    checkedCorps = makeArrayFormat(checkedBlocks);
+    const cartCorps = makeCartData(checkedCorps);
+    req.cartCorps = cartCorps;
+    const temp = await test();
+    // console.log(temp);
+    res.render("cart", { pagetitle: "Cart", cartCorps });
+  } catch (error) {
+    console.log(error);
+  }
 };
