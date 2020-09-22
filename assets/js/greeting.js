@@ -20,7 +20,7 @@ const paintGreeting = (text) => {
     resetBtn.id = RESET_BTN;
     resetBtn.className = "resetBtn";
     msgBox.innerText = `Hello ${text} !!!`;
-    resetBtn.innerText = "RESET 🗑";
+    resetBtn.innerText = " ❌ ";
 
     greeting.appendChild(msgBox);
     greeting.appendChild(resetBtn);

@@ -6,20 +6,24 @@
 }
 
 .nickname_column,
-.mainSearch,
-.showGreeting {
+.mainSearch {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-
 .nickname_column,
 .showGreeting {
   margin-bottom: 20px;
 }
 
 .showGreeting {
+  text-align: center;
   span {
     margin: 10px 0;
   }
+}
+
+.getNickname,
+.showGreeting {
+  font-size: 30px;
 }
