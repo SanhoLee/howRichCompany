@@ -5,6 +5,7 @@ import path from "path";
 import routes from "./routes";
 
 import globalRouter from "./routers/globalRouter";
+import cartRouter from "./routers/cartRouter";
 import { localsMiddleware } from "./middlewares";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
@@ -22,5 +23,6 @@ app.use(morgan("dev"));
 app.use(localsMiddleware);
 
 app.use(routes.home, globalRouter);
+app.use(routes.cart, cartRouter);
 
 export default app;

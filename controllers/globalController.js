@@ -96,6 +96,7 @@ const foundCorpList = ({ list, term }) => {
   return updatedCorpList;
 };
 
+// nickname info is appended by assets/greeting.js
 export const getSearch = async (req, res) => {
   const {
     query: { term: searchingBy, nickname },

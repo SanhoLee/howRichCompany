@@ -44,6 +44,7 @@ export const postCart = async (req, res) => {
   const {
     body: { corp_data: checkedBlocks },
   } = req;
+  console.log(req.body);
 
   try {
     let checkedCorps = NULL;
@@ -52,7 +53,7 @@ export const postCart = async (req, res) => {
     req.cartCorps = cartCorps;
     const temp = await test();
     // console.log(temp);
-    res.render("cart", { pagetitle: "Cart", cartCorps });
+    res.render("cartDetail", { pagetitle: "Cart Detail", cartCorps });
   } catch (error) {
     console.log(error);
   }

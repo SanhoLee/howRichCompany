@@ -4,18 +4,19 @@ include mixins/companyBlock
 block fwanggu
     .contents_wrap.show_header
         .search__header
-            h3 Seaching by ... #{searchingBy}
+            h3 Seaching by ... #{searchingBy} #{nickname}
             if foundCorps.length === 0
                 h5 No Corps found.
             h5 #{foundCorps.length} Companies Found.
         .search__corps
-            form(name="chcked_form", action=routes.cart, method="post")
+            form(name="chcked_form", action=routes.cartDetail(nickname), method="post")
+                input(type="hidden", name="nickname", value=nickname)
                 ul.company_elements#jsSearchCompanies
                     each item in foundCorps
                         +companyBlock({
                             corp_name:item.corp_name,
                             corp_code:item.corp_code
                         })
-                input(type="submit")
+                input(type="submit", value="GO CART")
 
                 
